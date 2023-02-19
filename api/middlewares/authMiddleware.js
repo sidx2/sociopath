@@ -11,7 +11,8 @@ module.exports = function (req, res, next) {
 
   // Verify token
   try {
-    jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+    // jwt.verify("dfsf", )
+    jwt.verify(token, "secret", (error, decoded) => {
       if (error) {
         console.log({ msg: 'Token is not valid' });
       } else {
@@ -20,7 +21,7 @@ module.exports = function (req, res, next) {
       }
     });
   } catch (err) {
-    console.error('something wrong with auth middleware');
-    res.status(500).json({ msg: 'Server Error' });
+    console.log('something wrong with auth middleware');
+    console.log({ msg: 'Server Error' });
   }
 };
