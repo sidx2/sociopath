@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
   }
 });
 //update a post
@@ -83,19 +83,25 @@ router.get("/timeline/:userId", async (req, res) => {
     );
     res.status(200).json(userPosts.concat(...friendPosts));
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
   }
 });
 
 //get user's all posts
 
-router.get("/profile/:username", async (req, res) => {
+router.get("/profile/:id", async (req, res) => {
+  console.log("username is : ", req.params.username);
   try {
-    const user = await User.findOne({ username: req.params.username });
-    const posts = await Post.find({ userId: user._id });
+    console.log("inside try");
+    const user = await User.findById(req.params.id );
+    console.log("found user");
+    console.log("user: ", user);
+    const posts = await Post.find({ userId: req.params.id });
+
+    console.log("posts: ", posts);
     res.status(200).json(posts);
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
   }
 });
 

@@ -1,0 +1,10 @@
+.avatar {
+    cursor: pointer;
+    animation-timing-function: ease;
+    transform: scale(0.75);
+}
+
+.avatar:hover  {
+    
+    transform: scale(0.8)
+}

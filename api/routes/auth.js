@@ -50,19 +50,21 @@ router.post("/login", async (req, res) => {
 // const User = require('../models/User');
 
 router.post('/user', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
 
     try {
       // check if the user already exists
       user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ msg: 'Email already exists' });
+        console.log({ msg: 'Email already exists' });
+        // return
       }
 
       // create new user
       user = new User({
         email,
         password,
+        username
       });
 
       // hash user password
@@ -79,7 +81,7 @@ router.post('/user', async (req, res) => {
 
       jwt.sign(
         payload,
-        process.env.JWT_SECRET,
+        "secret",
         { expiresIn: '7 days' },
         (err, token) => {
           if (err) throw err;
@@ -88,7 +90,7 @@ router.post('/user', async (req, res) => {
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      console.log('Server error');
     }
   }
 );
@@ -101,13 +103,15 @@ router.post('/user/login', async (req, res) => {
     // check if the user exists
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: 'Email or password incorrect' });
+      // return res.status(400).json({ msg: 'Email or password incorrect' });
+      console.log({ msg: 'Email or password incorrect' });
     }
 
     // check is the encrypted password matches
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Email or password incorrect' });
+      // return res.status(400).json({ msg: 'Email or password incorrect' });
+      console.log({ msg: 'Email or password incorrect' });
     }
 
     // return jwt
@@ -119,7 +123,7 @@ router.post('/user/login', async (req, res) => {
 
     jwt.sign(
       payload,
-      process.env.JWT_SECRET,
+      "secret",
       { expiresIn: '30 days' },
       (err, token) => {
         if (err) throw err;
@@ -129,6 +133,7 @@ router.post('/user/login', async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
+    console.log('Server error');
   }
 }
 );
@@ -144,3 +149,6 @@ router.get('/user/info', auth, async (req, res) => {
 });
 
 module.exports = router;
+
+// const res = getUserData("http://localhost:8800/api/auth/user/info/")
+// axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

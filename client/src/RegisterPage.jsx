@@ -39,7 +39,7 @@ const RegisterPage = () => {
         //     console.log(error);
         //   });
 
-        postData('http://localhost:8800/api/auth/register/', {
+        postData('http://localhost:8800/api/auth/user/', {
             "username": un,
             "email": em,
             "password": pw
