@@ -57,15 +57,16 @@ export default function NavBar() {
           hideIn="xs"
           variant="highlight-rounded"
         >
-          <Navbar.Link isActive="true" to="feed">
-            {/* <Linkk to="/feed">Feed</Linkk> */}
+          {/* <Navbar.Link isActive="true" to="feed">
             Feed
             </Navbar.Link>
           <Navbar.Link to="chat">
             Chat
           </Navbar.Link>
           <Navbar.Link to="about">About</Navbar.Link>
-          <Navbar.Link to="contact">Contact</Navbar.Link>
+          <Navbar.Link to="contact">Contact</Navbar.Link> */}
+          <Linkk to="/feed">Feed</Linkk>
+          <Linkk to="/about">About</Linkk>
         </Navbar.Content>
         <Navbar.Content
           css={{
@@ -82,9 +83,8 @@ export default function NavBar() {
                   <Avatar
                     bordered
                     as="button"
-                    color="secondary"
                     size="md"
-                    src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                    src={state.profilePic == "" ? "https://img.freepik.com/free-icon/user_318-790139.jpg" : `http://localhost:8800/images/${state.profilePic}`}
                   />
                 </Dropdown.Trigger>
               </Navbar.Item>
@@ -98,7 +98,7 @@ export default function NavBar() {
                     Signed in as
                   </Text>
                   <Text b color="inherit" css={{ d: "flex" }}>
-                    zoey@example.com
+                    {state.email}
                   </Text>
                 </Dropdown.Item>
                 <Dropdown.Item key="settings" withDivider>

@@ -7,6 +7,7 @@ const RegisterPage = () => {
     const [un, setun] = useState("")
     const [pw, setPw] = useState("")
     const [em, setEm] = useState("")
+    const [name, setName] = useState("")
 
     async function postData(url = '', data = {}) {
         // Default options are marked with *
@@ -42,7 +43,8 @@ const RegisterPage = () => {
         postData('http://localhost:8800/api/auth/user/', {
             "username": un,
             "email": em,
-            "password": pw
+            "password": pw,
+            "name": name
         }).then((data) => {
             console.log(data); // JSON data parsed by `data.json()` call
         });
@@ -53,9 +55,10 @@ const RegisterPage = () => {
     return (
         <div>
             <h1>Register Page</h1>
-            username : <input type="text" onChange={(e) => setun(e.target.value)} />
-            <br></br> password : <input type="text" onChange={(e) => setEm(e.target.value)} />
-            <br></br> email : <input type="text" onChange={(e) => setPw(e.target.value)} />
+             Name : <input type="text" onChange={(e) => setName(e.target.value)} />
+             <br></br> username : <input type="text" onChange={(e) => setun(e.target.value)} />
+            <br></br> password : <input type="text" onChange={(e) => setPw(e.target.value)} />
+            <br></br> email : <input type="text" onChange={(e) => setEm(e.target.value)} />
             <br /> <button onClick={hsub}>Submit</button>
         </div>
     )

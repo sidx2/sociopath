@@ -26,13 +26,14 @@ export default function Login() {
         const res = await axios.post(url, data)
         console.log(res.data)
         localStorage.setItem('token', res.data.token)
-        setState({
+        await setState({
             isLoggedIn: true,
             username: "",
-            email: ""
+            email: res.data.user.email,
+            _id: res.data.user._id
         
           })
-          redirect("/feed")
+          console.log("now the state is: ", state)
     } catch (e) {
         console.log(e)
     }

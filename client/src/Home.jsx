@@ -3,6 +3,7 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect, useContext } from 'react'
 import { LoginContext } from './App'
+import NavBar from './NavBar/NavBar'
 export const Home = () => {
 
   const [state, setState] = useContext(LoginContext)
@@ -27,6 +28,7 @@ export const Home = () => {
   }
   return (
     <div>
+      <NavBar />
       <h1>This is home page</h1>
       <Button onClick={fetchData}>
         FETCH
